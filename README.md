@@ -261,7 +261,11 @@ This is standard GitHub practice.
 MIT License — free to use, modify, and share.
 
 ---
+## Acknowledgements
 
+This project was developed with the assistance of ChatGPT (OpenAI) for workflow design and documentation refinement.
+
+---
 ## One-sentence summary
 
 > `mkproj` lets you start a clean, reproducible, GitHub-synced research project with one command.
