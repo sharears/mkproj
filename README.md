@@ -1,5 +1,8 @@
 # mkproj
 
+![mkproj workflow](images/mkproj_overview.png)
+
+
 ### One-command setup for reproducible research projects (local + GitHub)
 
 `mkproj` is a small command-line helper that lets you start a **new research project** with **one command**.
