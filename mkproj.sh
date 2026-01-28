@@ -139,7 +139,6 @@ fi
   # Sync histories safely
   # -------------------------
   echo "🔄 Syncing local and remote repositories"
-  git pull origin main --no-rebase --allow-unrelated-histories >/dev/null 2>&1 || true
 
   # -------------------------
   # Push
