@@ -78,6 +78,61 @@ mkproj/
 
 ---
 
+## Platform compatibility
+
+This workflow is **cross-platform** and works on all major operating systems **as long as a POSIX-compatible shell is available**.
+
+### Supported platforms
+
+* **macOS**
+
+  * Default shell: `zsh`
+  * Fully supported
+
+* **Linux** (Ubuntu, Debian, Fedora, CentOS, Arch, HPC systems)
+
+  * Default shell: `bash`
+  * Fully supported
+
+* **Windows** (with a Linux-like shell)
+
+  * **WSL (Windows Subsystem for Linux)** — recommended
+  * **Git Bash** — supported
+
+### Not supported
+
+* Windows **PowerShell**
+* Windows **CMD**
+
+These environments do not support POSIX shell syntax used by this workflow.
+
+---
+
+### Requirements (all platforms)
+
+* **POSIX-compatible shell** (`bash` or `zsh`)
+* **Git**
+* **GitHub CLI (`gh`)**
+
+No SSH configuration is required (HTTPS is used by default).
+
+---
+
+### Notes for shared systems and HPC
+
+* Works on login nodes with `bash` or `zsh`
+* Does not require administrator privileges
+* Can be used without GitHub access (local setup only) if needed
+
+---
+
+### Summary
+
+> `mkproj` works on macOS, Linux, and Windows (via WSL or Git Bash).
+> Native Windows shells (PowerShell, CMD) are not supported.
+
+---
+
 ## Installation (one-time)
 
 ### Step 1: Clone this repository
