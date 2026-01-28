@@ -2,7 +2,7 @@
 
 ![mkproj workflow](images/mkproj_overview.png)
 
-### One-command setup for reproducible research projects (local + GitHub)
+## One-command setup for reproducible research projects (local + GitHub)
 
 ---
 
