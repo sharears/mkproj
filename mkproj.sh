@@ -8,6 +8,8 @@ mkproj () {
 
   PROJECT="$1"
 
+  echo "DEBUG: mkproj UPDATED VERSION LOADED"
+
   # -------------------------
   # Basic checks
   # -------------------------
