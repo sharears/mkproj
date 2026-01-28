@@ -41,7 +41,7 @@ Run `mkproj <project_name>` and start working—no Git setup, no folder chaos.
 Many reproducibility problems begin before analysis even starts—unclear folder structures, mixed data and code, or missing documentation.
 This workflow enforces a clean separation between **data, code, results, and logs from day one**, making reproducibility a default rather than an afterthought.
 
-### 2️⃣ It removes Git friction for researchers and students
+### 2️⃣ It removes Git friction for researchers
 
 Git errors, merge conflicts, and accidental data uploads are common pain points, especially for new lab members.
 `mkproj` automates best practices (correct `.gitignore`, safe merges, license handling), allowing users to focus on **scientific reasoning instead of version-control mechanics**.
