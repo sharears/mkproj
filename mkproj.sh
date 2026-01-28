@@ -102,19 +102,33 @@ EOF
   git commit -m "Initial project structure" >/dev/null
 
   # -------------------------
-  # Create or connect GitHub repo
+  # Create or connect GitHub repo (HPC-safe)
   # -------------------------
   echo "🌐 Creating or connecting GitHub repository"
-  gh repo create "$PROJECT" --private --license MIT --confirm >/dev/null 2>&1 || true
 
-  REMOTE_URL=$(gh repo view "$PROJECT" --json url -q .url 2>/dev/null)
+  # If no remote exists, create repo explicitly
+  if ! git remote get-url origin >/dev/null 2>&1; then
+    echo "🔗 No GitHub remote found — creating repository"
 
-  if [ -z "$REMOTE_URL" ]; then
-    echo "Error: could not determine GitHub repository URL."
-    return 1
+    if ! gh repo create "$PROJECT" \
+        --source=. \
+        --remote=origin \
+        --private \
+        --confirm; then
+      echo "Error: failed to create GitHub repository."
+      return 1
+    fi
+  else
+    echo "🔗 GitHub remote already exists"
   fi
 
-  git remote add origin "$REMOTE_URL" 2>/dev/null || true
+  # Verify remote URL via git (source of truth)
+  REMOTE_URL=$(git remote get-url origin 2>/dev/null)
+
+  if [ -z "$REMOTE_URL" ]; then
+    echo "Error: GitHub remote was not set correctly."
+    return 1
+  fi
 
   # -------------------------
   # Sync histories safely
