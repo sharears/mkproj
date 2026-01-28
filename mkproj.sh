@@ -114,6 +114,7 @@ EOF
         --source=. \
         --remote=origin \
         --private \
+        --push \
         --confirm; then
       echo "Error: failed to create GitHub repository."
       return 1
