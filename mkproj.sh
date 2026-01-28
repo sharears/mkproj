@@ -101,35 +101,39 @@ EOF
   git add .
   git commit -m "Initial project structure" >/dev/null
 
-  # -------------------------
-  # Create or connect GitHub repo (HPC-safe)
-  # -------------------------
-  echo "🌐 Creating or connecting GitHub repository"
+# -------------------------
+# Create or connect GitHub repo (HPC-proof)
+# -------------------------
+echo "🌐 Creating or connecting GitHub repository"
 
-  # If no remote exists, create repo explicitly
-  if ! git remote get-url origin >/dev/null 2>&1; then
-    echo "🔗 No GitHub remote found — creating repository"
+if ! git remote get-url origin >/dev/null 2>&1; then
+  echo "🔗 No GitHub remote found — creating repository"
 
-    if ! gh repo create "$PROJECT" \
-        --source=. \
-        --remote=origin \
-        --private \
-        --push \
-        --confirm; then
-      echo "Error: failed to create GitHub repository."
-      return 1
-    fi
-  else
-    echo "🔗 GitHub remote already exists"
-  fi
-
-  # Verify remote URL via git (source of truth)
-  REMOTE_URL=$(git remote get-url origin 2>/dev/null)
-
-  if [ -z "$REMOTE_URL" ]; then
-    echo "Error: GitHub remote was not set correctly."
+  # Create repo on GitHub ONLY (no source, no push)
+  if ! gh repo create "$PROJECT" --private --confirm; then
+    echo "Error: failed to create GitHub repository."
     return 1
   fi
+
+  # Determine GitHub username explicitly
+  GH_USER=$(gh api user -q .login)
+
+  if [ -z "$GH_USER" ]; then
+    echo "Error: could not determine GitHub username."
+    return 1
+  fi
+
+  # Manually add remote (rock-solid)
+  git remote add origin "https://github.com/$GH_USER/$PROJECT.git"
+fi
+
+REMOTE_URL=$(git remote get-url origin 2>/dev/null)
+
+if [ -z "$REMOTE_URL" ]; then
+  echo "Error: could not determine GitHub repository URL."
+  return 1
+fi
+
 
   # -------------------------
   # Sync histories safely
