@@ -129,6 +129,9 @@ fi
 
 REMOTE_URL=$(git remote get-url origin 2>/dev/null)
 
+echo "DEBUG: reached REMOTE_URL check"
+git remote -v || echo "DEBUG: no remotes found"
+
 if [ -z "$REMOTE_URL" ]; then
   echo "Error: could not determine GitHub repository URL."
   return 1
